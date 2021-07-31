@@ -6,7 +6,7 @@ resource "aws_ecr_repository" "main" {
   }
 }
 
-aws "aws_ecr_lifecycle_policy" "main" {
+resource "aws_ecr_lifecycle_policy" "main" {
   repository = aws_ecr_repository.main.name
   policy = jsonencode({
     rules = [
