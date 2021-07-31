@@ -35,7 +35,6 @@ resource "aws_iam_user" "github_action" {
 data "aws_iam_policy_document" "github_action" {
   version = "2012-10-17"
   statement {
-    sid = "Get Docker CLI creds"
     actions = [
       "ecr:GetAuthorizationToken",
     ]
