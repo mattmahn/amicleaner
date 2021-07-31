@@ -29,7 +29,7 @@ resource "aws_ecr_lifecycle_policy" "main" {
 
 resource "aws_iam_user" "github_action" {
   name = "amicleaner"
-  path = "/github-actions"
+  path = "/github-actions/"
 }
 
 data "aws_iam_policy_document" "github_action" {
