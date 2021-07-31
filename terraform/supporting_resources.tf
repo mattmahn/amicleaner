@@ -39,7 +39,7 @@ data "aws_iam_policy_document" "github_action" {
     actions = [
       "ecr:GetAuthorizationToken",
     ]
-    resources = "*"
+    resources = ["*"]
   }
 }
 
