@@ -26,3 +26,24 @@ resource "aws_ecr_lifecycle_policy" "main" {
     ]
   })
 }
+
+resource "aws_iam_user" "github_action" {
+  name = "amicleaner"
+  path = "/github-actions"
+}
+
+data "aws_iam_policy_document" "github_action" {
+  version = "2012-10-17"
+  statement {
+    sid = "Get Docker CLI creds"
+    actions = [
+      "ecr:GetAuthorizationToken",
+    ]
+    resources = "*"
+  }
+}
+
+resource "aws_iam_user_policy" "github_action" {
+  user   = aws_iam_user.github_action.name
+  policy = data.aws_iam_policy_document.github_action.json
+}
