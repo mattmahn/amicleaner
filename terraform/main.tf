@@ -1,3 +1,4 @@
+data "aws_caller_identity" "current" {}
 data "aws_region" "current" {}
 
 data "aws_iam_policy_document" "amicleaner" {
@@ -51,7 +52,8 @@ resource "aws_lambda_function" "amicleaner" {
   function_name = "amicleaner"
   role          = aws_iam_role.amicleaner.arn
 
-  image_uri = "753998182346.dkr.ecr.us-east-2.amazonaws.com/amicleaner:latest"
+  package_type = "Image"
+  image_uri    = "${data.aws_caller_identity.current.account_id}.dkr.ecr.${data.aws_region.current.name}.amazonaws.com/amicleaner:latest"
   image_config {
     command = [
       "amicleaner",
