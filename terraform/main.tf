@@ -53,7 +53,13 @@ resource "aws_lambda_function" "amicleaner" {
 
   image_uri = "753998182346.dkr.ecr.us-east-2.amazonaws.com/amicleaner:latest"
   image_config {
-    command = "amicleaner --ami-min-days 7 --force-delete --check-orphans --mapping-values 'Name'"
+    command = [
+      "amicleaner",
+      "--ami-min-days=7",
+      "--force-delete",
+      "--check-orphans",
+      "--mapping-values='Name'",
+    ]
   }
 }
 
