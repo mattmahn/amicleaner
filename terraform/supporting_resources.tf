@@ -36,9 +36,18 @@ data "aws_iam_policy_document" "github_action" {
   version = "2012-10-17"
   statement {
     actions = [
+      "ecr:BatchCheckLayerAvailability",
+      "ecr:BatchGetImage",
+      "ecr:CompleteLayerUpload",
       "ecr:GetAuthorizationToken",
+      "ecr:GetDownloadUrlForLayer",
+      "ecr:InitiateLayerUpload",
+      "ecr:PutImage",
+      "ecr:UploadLayerPart",
     ]
-    resources = ["*"]
+    resources = [
+      aws_ecr_repository.main.arn,
+    ]
   }
 }
 
