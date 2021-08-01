@@ -36,8 +36,8 @@ resource "aws_iam_role" "amicleaner" {
             "autoscaling:DescribeLaunchConfigurations",
             "ec2:DeleteSnapshot",
             "ec2:DeregisterImage",
-            "ec2:DescribeImage",
-            "ec2:DescribeInstance",
+            "ec2:DescribeImages",
+            "ec2:DescribeInstances",
             "ec2:DescribeSnapshots",
           ]
           Effect   = "Allow"
