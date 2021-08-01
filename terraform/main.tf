@@ -1,18 +1,6 @@
 data "aws_caller_identity" "current" {}
 data "aws_region" "current" {}
 
-data "aws_iam_policy_document" "amicleaner" {
-  version = "2012-10-17"
-  statement {
-    actions = [
-      "ecr:GetAuthorizationToken",
-    ]
-    resources = [
-      "*"
-    ]
-  }
-}
-
 resource "aws_iam_role" "amicleaner" {
   name = "amicleaner"
   assume_role_policy = jsonencode({
