@@ -46,6 +46,11 @@ resource "aws_iam_role" "amicleaner" {
       ]
     })
   }
+  managed_policy_arns = [
+    "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+  ]
+
+  tags = {}
 }
 
 resource "aws_lambda_function" "amicleaner" {
@@ -64,6 +69,8 @@ resource "aws_lambda_function" "amicleaner" {
     ]
   }
   timeout = 300
+
+  tags = {}
 }
 
 resource "aws_lambda_permission" "allow_cloudwatch" {
@@ -83,4 +90,6 @@ resource "aws_cloudwatch_event_rule" "weekly" {
   description         = "Run amicleaner weekly"
   is_enabled          = true
   schedule_expression = "rate(7 days)"
+
+  tags = {}
 }
