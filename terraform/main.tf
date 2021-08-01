@@ -63,6 +63,7 @@ resource "aws_lambda_function" "amicleaner" {
       "--mapping-values='Name'",
     ]
   }
+  timeout = 300
 }
 
 resource "aws_lambda_permission" "allow_cloudwatch" {
