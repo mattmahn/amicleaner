@@ -65,7 +65,7 @@ resource "aws_lambda_function" "amicleaner" {
 
 resource "aws_lambda_permission" "allow_cloudwatch" {
   action        = "lambda:InvokeFunction"
-  function_name = aws_lambda_function.amicleaner.name
+  function_name = aws_lambda_function.amicleaner.arn
   principal     = "events.amazonaws.com"
   source_arn    = aws_cloudwatch_event_rule.weekly.arn
 }
