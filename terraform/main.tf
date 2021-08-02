@@ -1,6 +1,3 @@
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
-
 resource "aws_iam_role" "amicleaner" {
   name = "amicleaner"
   assume_role_policy = jsonencode({
@@ -46,7 +43,7 @@ resource "aws_lambda_function" "amicleaner" {
   role          = aws_iam_role.amicleaner.arn
 
   package_type = "Image"
-  image_uri    = "${data.aws_caller_identity.current.account_id}.dkr.ecr.${data.aws_region.current.name}.amazonaws.com/amicleaner:latest"
+  image_uri    = "${aws_ecr_repository.main.repository_url}:latest"
   image_config {
     command = [
       "amicleaner",
