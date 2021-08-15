@@ -53,7 +53,7 @@ resource "aws_lambda_function" "amicleaner" {
       "--mapping-values='Name'",
     ]
   }
-  timeout = 300
+  timeout = 900
 
   tags = {}
 }
@@ -62,19 +62,19 @@ resource "aws_lambda_permission" "allow_cloudwatch" {
   action        = "lambda:InvokeFunction"
   function_name = aws_lambda_function.amicleaner.arn
   principal     = "events.amazonaws.com"
-  source_arn    = aws_cloudwatch_event_rule.weekly.arn
+  source_arn    = aws_cloudwatch_event_rule.daily.arn
 }
 
-resource "aws_cloudwatch_event_target" "weekly" {
+resource "aws_cloudwatch_event_target" "daily" {
   arn  = aws_lambda_function.amicleaner.arn
-  rule = aws_cloudwatch_event_rule.weekly.id
+  rule = aws_cloudwatch_event_rule.daily.id
 }
 
-resource "aws_cloudwatch_event_rule" "weekly" {
-  name                = "amicleaner-weekly"
-  description         = "Run amicleaner weekly"
+resource "aws_cloudwatch_event_rule" "daily" {
+  name                = "amicleaner-daily"
+  description         = "Run amicleaner daily"
   is_enabled          = true
-  schedule_expression = "rate(7 days)"
+  schedule_expression = "rate(1 day)"
 
   tags = {}
 }
